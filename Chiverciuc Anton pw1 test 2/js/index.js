@@ -49,7 +49,7 @@ window.onload = function(){
     creatElement("ol", '','', '', container);
     let ol = document.querySelector('ol');
     for(var i = 1; i <= 10; i++)
-        creatElement('li','', ("Element NR {{" + i + "}}"), '', ol);
+        creatElement('li', '', ("Element NR {{" + i + "}}"), '', ol);
 
     //EX 6
     let list = document.querySelector('ol');
@@ -97,12 +97,43 @@ window.onload = function(){
         creatElement('li', '', ("Element NR {{" + (c.length + 1) + "}}"), '', ol)
     }, 1000)
 
-    //12
-    creatElement("button" , 'increment' , 'Control 1' , '', document.body);
+    //EX 12
+    creatElement("button" , 'increment' , 'Control 1', '', document.body);
     let butonincrement = document.querySelector('.increment');
     butonincrement.value = 1;
-    console.log(parseInt(butonincrement.value));
+    butonincrement.onclick = function(){
+        butonincrement.innerHTML = "Control " + ++butonincrement.value;
+    }
+    //EX 13
+    afiseaza([ 2, 1, 90 ,1 ,2 ,10, -1, 4, -5, 6]);   
 
+    
+    
+    //EX 13
+    function afiseaza(array){
+        creatElement("ul", '','', '', document.body);
+        let ul = document.querySelector('ul');
+        let i = 0;
+        let afiseazama = setInterval(function(){
+            creatElement('li', '', array[i], '', ul);
+            i++
+            if(i == array.length){
+                setezaTitle()
+                //EX14
+                clearInterval(afiseazama);
+            }
+                
+        }, 250)
+    }
+    //EX14
+    function setezaTitle(){
+        let ul = document.querySelector('ul');
+        var c = ul.childNodes;
+        c.forEach(el => {
+            let num = parseInt(el.innerHTML);
+            el.title = num * num;
+        })
+    }
     function creatElement(tag, classa, html, name, appendTo){
         let element = document.createElement(tag);
         if(name != '')
